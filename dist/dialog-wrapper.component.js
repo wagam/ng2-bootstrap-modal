@@ -28,10 +28,10 @@ var DialogWrapperComponent = (function () {
     DialogWrapperComponent.prototype.closeByClickOutside = function () {
         var _this = this;
         var containerEl = this.container.nativeElement;
-        containerEl.querySelector('.modal-content').addEventListener('click', function (event) {
+        containerEl.querySelector('.modal-content').addEventListener('mouseup', function (event) {
             event.stopPropagation();
         });
-        containerEl.addEventListener('click', function () {
+        containerEl.addEventListener('mouseup', function () {
             _this.dialogService.removeDialog(_this.content);
         }, false);
     };
