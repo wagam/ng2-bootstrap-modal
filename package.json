@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ankosoftware/ng2-bootstrap-modal.git"
+    "url": "git+https://github.com/Sky4CE/ng2-bootstrap-modal.git"
   },
   "keywords": [
     "angular2",
@@ -17,12 +17,12 @@
     "dialog",
     "modal"
   ],
-  "author": "Alexandr Vovchuk <a.vovchuk@gmail.com> (bikalay)",
+  "author": "Vitalii Tiunisov <tyunisov@gmail.com> (Sky4CE)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ankosoftware/ng2-bootstrap-modal/issues"
+    "url": "https://github.com/Sky4CE/ng2-bootstrap-modal/issues"
   },
-  "homepage": "https://github.com/ankosoftware/ng2-bootstrap-modal#readme",
+  "homepage": "https://github.com/Sky4CE/ng2-bootstrap-modal#readme",
   "dependencies": {},
   "devDependencies": {
     "@angular/common": "^2.4.9",
