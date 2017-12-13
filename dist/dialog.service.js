@@ -67,11 +67,11 @@ var DialogService = (function () {
         if (!this.dialogHolderComponent) {
             this.dialogHolderComponent = this.createDialogHolder();
         }
-        if (!(options && options.suppressCount && !options.suppressCount))
+        if (!(options && options.suppressCount !== undefined && options.suppressCount))
             this._modalsCount++;
         var dlgObservable = this.dialogHolderComponent.addDialog(component, data, options).share();
         dlgObservable.subscribe(function (result) {
-            if (!(options && options.suppressCount && !options.suppressCount))
+            if (!(options && options.suppressCount !== undefined && options.suppressCount))
                 _this._modalsCount--;
         });
         return dlgObservable;
@@ -85,12 +85,12 @@ var DialogService = (function () {
                         if (!this.dialogHolderComponent) {
                             this.dialogHolderComponent = this.createDialogHolder();
                         }
-                        if (!(options && options.suppressCount && !options.suppressCount))
+                        if (!(options && options.suppressCount !== undefined && options.suppressCount))
                             this._modalsCount++;
                         return [4, this.dialogHolderComponent.addDialogAsync(component, data, options)];
                     case 1:
                         result = _a.sent();
-                        if (!(options && options.suppressCount && !options.suppressCount))
+                        if (!(options && options.suppressCount !== undefined && options.suppressCount))
                             this._modalsCount--;
                         return [2, result];
                 }

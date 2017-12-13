@@ -60,11 +60,11 @@ export class DialogService {
     if(!this.dialogHolderComponent) {
       this.dialogHolderComponent = this.createDialogHolder();
     }
-    if (!(options && options.suppressCount && !options.suppressCount))
+    if (!(options && options.suppressCount !== undefined && options.suppressCount))
       this._modalsCount++;
     const dlgObservable = this.dialogHolderComponent.addDialog<T, T1>(component, data, options).share();
     dlgObservable.subscribe(result => {
-      if (!(options && options.suppressCount && !options.suppressCount))
+      if (!(options && options.suppressCount !== undefined && options.suppressCount))
         this._modalsCount--;
     });
     return dlgObservable;
@@ -74,10 +74,10 @@ export class DialogService {
     if(!this.dialogHolderComponent) {
       this.dialogHolderComponent = this.createDialogHolder();
     }
-    if (!(options && options.suppressCount && !options.suppressCount))
+    if (!(options && options.suppressCount !== undefined && options.suppressCount))
       this._modalsCount++;
     const result = await this.dialogHolderComponent.addDialogAsync<T, T1>(component, data, options);
-    if (!(options && options.suppressCount && !options.suppressCount))
+    if (!(options && options.suppressCount !== undefined && options.suppressCount))
       this._modalsCount--;
     return result;
   }
