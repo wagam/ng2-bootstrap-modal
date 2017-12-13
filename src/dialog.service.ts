@@ -4,12 +4,14 @@ import {
 import { DialogHolderComponent } from "./dialog-holder.component";
 import { DialogComponent } from "./dialog.component";
 import { Observable } from "rxjs/Observable";
+import 'rxjs/add/operator/share';
 
 export interface DialogOptions {
   index?: number;
   autoCloseTimeout?: number;
   closeByClickingOutside?: boolean;
   backdropColor?: string;
+  suppressCount?: boolean;
 }
 
 export class DialogServiceConfig {
@@ -41,6 +43,12 @@ export class DialogService {
     this.container = config && config.container;
   }
 
+  private _modalsCount: number = 0;
+
+  get modalsCount() {
+    return this._modalsCount;
+  }
+
   /**
    * Adds dialog
    * @param {Type<DialogComponent<T, T1>>} component
@@ -52,7 +60,26 @@ export class DialogService {
     if(!this.dialogHolderComponent) {
       this.dialogHolderComponent = this.createDialogHolder();
     }
-    return this.dialogHolderComponent.addDialog<T, T1>(component, data, options);
+    if (!(options && options.suppressCount && !options.suppressCount))
+      this._modalsCount++;
+    const dlgObservable = this.dialogHolderComponent.addDialog<T, T1>(component, data, options).share();
+    dlgObservable.subscribe(result => {
+      if (!(options && options.suppressCount && !options.suppressCount))
+        this._modalsCount--;
+    });
+    return dlgObservable;
+  }
+
+  async addDialogAsync<T, T1>(component:Type<DialogComponent<T, T1>>, data?:T, options?:DialogOptions): Promise<T1> {
+    if(!this.dialogHolderComponent) {
+      this.dialogHolderComponent = this.createDialogHolder();
+    }
+    if (!(options && options.suppressCount && !options.suppressCount))
+      this._modalsCount++;
+    const result = await this.dialogHolderComponent.addDialogAsync<T, T1>(component, data, options);
+    if (!(options && options.suppressCount && !options.suppressCount))
+      this._modalsCount--;
+    return result;
   }
 
   /**

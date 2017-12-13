@@ -5,6 +5,7 @@ import {
 import {DialogComponent} from "./dialog.component";
 import {DialogWrapperComponent} from "./dialog-wrapper.component";
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/take';
 import {DialogOptions} from "./dialog.service";
 
 @Component({
@@ -31,7 +32,7 @@ export class DialogHolderComponent {
   constructor(private resolver: ComponentFactoryResolver) {}
 
   /**
-   * Adds dialog
+   * Adds dialog 
    * @param {Type<DialogComponent>} component
    * @param {object?} data
    * @param {DialogOptions?} options
@@ -65,6 +66,10 @@ export class DialogHolderComponent {
       dialogWrapper.container.nativeElement.style.backgroundColor = options.backdropColor;
     }
     return _component.fillData(data);
+  }
+
+  addDialogAsync<T, T1>(component:Type<DialogComponent<T, T1>>, data?:T, options?:DialogOptions): Promise<T1> {
+    return this.addDialog<T, T1>(component, data, options).take(1).toPromise();
   }
 
   /**

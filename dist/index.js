@@ -6,5 +6,6 @@ var dialog_component_1 = require("./dialog.component");
 exports.DialogComponent = dialog_component_1.DialogComponent;
 var dialog_service_1 = require("./dialog.service");
 exports.DialogService = dialog_service_1.DialogService;
+exports.DialogOptions = dialog_service_1.DialogOptions;
 exports.DialogServiceConfig = dialog_service_1.DialogServiceConfig;
 //# sourceMappingURL=index.js.map
