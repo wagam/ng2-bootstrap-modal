@@ -60,6 +60,9 @@ export class DialogWrapperComponent {
     containerEl.querySelector('.modal-content').addEventListener('mouseup', (event)=> {
       event.stopPropagation();
     });
+    containerEl.querySelector('.modal-dialog').addEventListener('mousedown', (event) => {
+      event.stopPropagation()
+    });
     containerEl.addEventListener('mouseup', () => {
         this.dialogService.removeDialog(this.content);
     }, false);
